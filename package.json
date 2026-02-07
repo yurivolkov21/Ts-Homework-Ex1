@@ -1,0 +1,28 @@
+{
+  "name": "ts-homework-ex1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"tsc --watch\" \"node --watch ./dist/index.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yurivolkov21/Ts-Homework-Ex1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/yurivolkov21/Ts-Homework-Ex1/issues"
+  },
+  "homepage": "https://github.com/yurivolkov21/Ts-Homework-Ex1#readme",
+  "dependencies": {
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0"
+  }
+}
