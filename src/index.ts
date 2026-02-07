@@ -133,7 +133,7 @@ const server = createServer(
 
                 if (productIndex !== -1) {
                     products.splice(productIndex, 1);
-                    res.writeHead(204);
+                    res.writeHead(200);
                     res.end(JSON.stringify({ message: 'Product deleted' }));
                 } else {
                     res.writeHead(404);
