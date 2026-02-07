@@ -1,7 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'node:http';
 import { getNextId, products, type Product } from './models/Product.js';
 
-const hostName = '192.168.20.36';
+const hostName = '192.168.1.6';
 const port = 3000;
 
 const server = createServer(
