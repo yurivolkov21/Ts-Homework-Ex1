@@ -28,8 +28,31 @@ const server = createServer(
                 break;
 
             case 'GET /products':
+                const url = new URL(req.url!, `http://${req.headers.host}`);
+
+                const name = url.searchParams.get('name');
+
+                const page = parseInt(url.searchParams.get('page') || '1');
+
+                const limit = parseInt(url.searchParams.get('limit') || '5');
+
+                let resultProducts = products;
+
+                if (name) {
+                    resultProducts = resultProducts.filter(p => p.name.toLowerCase().includes(name.toLowerCase()));
+                }
+
+                const startIndex = (page - 1) * limit;
+                const paginatedResults = resultProducts.slice(startIndex, startIndex + limit);
+
                 res.writeHead(200);
-                res.end(JSON.stringify(products));
+                res.end(JSON.stringify({
+                    total: resultProducts.length,
+                    page,
+                    limit,
+                    totalPages: Math.ceil(resultProducts.length / limit),
+                    data: paginatedResults
+                }));
                 break;
 
             case 'GET /products/:id':
@@ -167,11 +190,17 @@ function getIdFromParam(path?: string): number | null {
 }
 
 function normalizeProduct(method?: string, path?: string): string {
-    const id = getIdFromParam(path);
+    if (!path) {
+        return `${method} ${path}`;
+    }
+
+    const pathname = path.split('?')[0];
+
+    const id = getIdFromParam(pathname);
 
     if (id !== null) {
         return `${method} /products/:id`;
     }
 
-    return `${method} ${path}`;
+    return `${method} ${pathname}`;
 }
